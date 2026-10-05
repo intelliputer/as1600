@@ -97,6 +97,11 @@ Linux binaries are included, so a build is often unnecessary. To build the
 tools yourself, follow [`src/README.txt`](src/README.txt); the resulting
 executables are placed in `bin/`.
 
+> **Legacy Macintosh source:** `src/plat/plat_mac.c` and its related resource
+> files target Classic Mac OS Toolbox APIs. They are retained for historical
+> reference, are not selected by the active build, and do not support modern
+> macOS.
+
 ## Getting started
 
 The included programs target the Intellivision and can be used on hardware with
