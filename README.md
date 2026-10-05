@@ -22,9 +22,12 @@ libre—toolset for programming CP-1600-based hardware.
   Intellivision with ECS
 - Source code for the complete kit
 
-Prebuilt Linux and Win32 tools are supplied in [`bin/`](bin/). Source and
-build instructions are in [`src/`](src/README.txt), and the examples are in
+Native Linux tools are supplied in [`bin/`](bin/). Source and build
+instructions are in [`src/`](src/README.txt), and the examples are in
 [`examples/`](examples/README.txt).
+
+For autonomous or agent-assisted development, begin with
+[AGENT_GUIDE.md](AGENT_GUIDE.md).
 
 ## Tools
 
@@ -86,17 +89,7 @@ installation with:
 as1600
 ```
 
-The expected response when no source file is supplied is `as1600: no input files`.
-
-On DOS or Windows 9x, add the equivalent directory to `C:\\AUTOEXEC.BAT`, for
-example:
-
-```bat
-PATH=%PATH%;C:\\SDK1600\\BIN
-```
-
-Modern Windows users can add the same `bin` directory through their user or
-system `PATH` environment variable.
+The expected response when no source file is supplied is `as1600: no input file`.
 
 ### Building on Linux or Unix
 
@@ -162,7 +155,7 @@ Examples are designed to assemble in their own directories. Most include
 routines from `examples/library/` via relative paths. If you move an example
 into another project, update its `INCLUDE` paths, copy the required library
 files, or configure `AS1600_PATH` as described in
-[`doc/utilities/as1600.txt`](doc/utilities/as1600.txt).
+[`doc/utilities/as1600.md`](doc/utilities/as1600.md).
 
 For CP-1600 background, see the documentation under `doc/`, especially the
 Intro to CP-1600 material in `doc/programming/`.
