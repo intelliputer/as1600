@@ -1,0 +1,47 @@
+##############################################################################
+## MingW32 Win32-Cross-Compile Variant of AS1600 MAKEFILE
+##############################################################################
+
+##############################################################################
+## Project directory structure
+##############################################################################
+B=../../bin
+
+##############################################################################
+## Project-wide build flags
+##############################################################################
+P         = PATH=/usr/local/win32/bin:$$PATH; export PATH;
+
+#WARN    = -Wall -W -Wshadow -Wpointer-arith \
+#WARN   += -Wbad-function-cast -Wcast-qual 
+WARN =
+
+CC = $(P) gcc
+
+ DEF_FLAGS  = -DWIN32 -DNOGETOPT -DDOSTMP
+
+#OPT_FLAGS = -O
+#OPT_FLAGS = -O2 -ggdb $(WARN)
+ OPT_FLAGS = -O6 $(WARN)
+#OPT_FLAGS = -O2 -pg -ggdb $(WARN) 
+
+CFLAGS = $(OPT_FLAGS) -I. -I.. $(DEF_FLAGS)
+LFLAGS = -L../lib 
+
+
+##############################################################################
+
+
+PROGS   = $(B)/dasm1600.exe $(B)/dasm1600o.exe
+
+all: $(PROGS)
+
+clean:
+
+$(B)/dasm1600.exe: dasm1600.c
+	$(CC) -s -o $(B)/dasm1600.exe $(CFLAGS) dasm1600.c -static
+
+$(B)/dasm1600o.exe: dasm1600o.c
+	$(CC) -s -o $(B)/dasm1600o.exe $(CFLAGS) dasm1600o.c -static
+
+

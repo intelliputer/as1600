@@ -1,0 +1,86 @@
+##############################################################################
+## subMakefile for utilities
+##############################################################################
+
+$(B)/test_cart$(X): util/test_cart.o  util/cart.o plat/plat_lib.o
+	$(CC) -O6 -o $(B)/test_cart$(X) $(CFLAGS) util/test_cart.o util/cart.o plat/plat_lib.o
+
+$(B)/test_hcif$(X): util/test_hcif.c
+	$(CC) -O6 -o $(B)/test_hcif$(X) $(CFLAGS) util/test_hcif.c
+
+$(B)/show_grom$(X): util/show_grom.o
+	$(CC) -o $(B)/show_grom$(X) $(CFLAGS) util/show_grom.o
+
+$(B)/tohex$(X): util/tohex.o
+	$(CC) -o $(B)/tohex$(X) $(CFLAGS) util/tohex.o
+
+$(B)/tobit$(X): util/tobit.o
+	$(CC) -o $(B)/tobit$(X) $(CFLAGS) util/tobit.o
+
+$(B)/tobit_f$(X): util/tobit_f.o
+	$(CC) -o $(B)/tobit_f$(X) $(CFLAGS) util/tobit_f.o
+
+$(B)/tobit_r$(X): util/tobit_r.o
+	$(CC) -o $(B)/tobit_r$(X) $(CFLAGS) util/tobit_r.o
+
+$(B)/fromhex$(X): util/fromhex.o
+	$(CC) -o $(B)/fromhex$(X) $(CFLAGS) util/fromhex.o
+
+$(B)/frombit$(X): util/frombit.o
+	$(CC) -o $(B)/frombit$(X) $(CFLAGS) util/frombit.o
+
+$(B)/frombit_r$(X): util/frombit_r.o
+	$(CC) -o $(B)/frombit_r$(X) $(CFLAGS) util/frombit_r.o
+
+$(B)/dasm0256$(X): util/dasm0256.o misc/avl.o util/symtab.o util/bitmem.o
+	$(CC) -o $(B)/dasm0256$(X) $(CFLAGS) misc/avl.o util/symtab.o util/bitmem.o util/dasm0256.o
+
+$(B)/rom2bin$(X): util/rom2bin.o icart/icartrom.o icart/icartbin.o misc/crc16.o
+	$(CC) -o $(B)/rom2bin$(X) $(CFLAGS) util/rom2bin.o icart/icartrom.o icart/icartbin.o misc/crc16.o
+
+$(B)/bin2rom$(X): util/bin2rom.o icart/icartrom.o misc/crc16.o
+	$(CC) -o $(B)/bin2rom$(X) $(CFLAGS) util/bin2rom.o icart/icartrom.o misc/crc16.o
+
+$(B)/gms2rom$(X): util/gms2rom.o icart/icartrom.o misc/crc16.o
+	$(CC) -o $(B)/gms2rom$(X) $(CFLAGS) util/gms2rom.o icart/icartrom.o misc/crc16.o
+
+$(B)/ec_load$(X): util/ec_load.o util/ecscable.o icart/icartrom.o misc/crc16.o plat/plat_lib.o
+	$(CC) -o $(B)/ec_load$(X) $(CFLAGS) util/ec_load.o util/ecscable.o icart/icartrom.o misc/crc16.o plat/plat_lib.o
+
+$(B)/ec_watch$(X): util/ec_watch.o util/ecscable.o  plat/plat_lib.o
+	$(CC) -o $(B)/ec_watch$(X) $(CFLAGS) util/ec_watch.o util/ecscable.o  plat/plat_lib.o
+
+$(B)/ec_dump$(X): util/ec_dump.o util/ecscable.o  plat/plat_lib.o
+	$(CC) -o $(B)/ec_dump$(X) $(CFLAGS) util/ec_dump.o util/ecscable.o  plat/plat_lib.o
+
+$(B)/ec_test$(X): util/ec_test.o util/ecscable.o  plat/plat_lib.o
+	$(CC) -o $(B)/ec_test$(X) $(CFLAGS) util/ec_test.o util/ecscable.o  plat/plat_lib.o
+
+util/cart.o:        util/cart.h config.h plat/plat_lib.h
+util/test_cart.o:   util/cart.h config.h plat/plat_lib.h
+util/test_hcif.o:   config.h plat/plat_lib.h
+util/ec_test.o:     util/ecscable.h config.h plat/plat_lib.h
+util/ec_dump.o:     util/ecscable.h config.h plat/plat_lib.h
+util/ec_watch.o:    util/ecscable.h config.h plat/plat_lib.h
+util/ec_load.o:     util/ecscable.h config.h plat/plat_lib.h
+util/ecscable.o:    util/ecscable.h config.h
+util/dasm0256.o:    misc/avl.h util/symtab.h util/bitmem.h
+util/symtab.o:      misc/avl.h util/symtab.h
+util/bitmem.o:      util/bitmem.h
+util/rom2bin.o:     misc/crc16.h icart/icartrom.h icart/icartbin.h
+util/bin2rom.o:     misc/crc16.h icart/icartrom.h
+util/gms2rom.o:     misc/crc16.h icart/icartrom.h
+
+PROGS += $(B)/test_hcif$(X) $(B)/test_cart$(X) $(B)/show_grom$(X)
+PROGS += $(B)/tobit$(X) $(B)/tobit_r$(X) $(B)/frombit$(X) $(B)/frombit_r$(X)
+PROGS += $(B)/tohex$(X) $(B)/fromhex$(X) $(B)/bin2rom$(X)
+PROGS += $(B)/dasm0256$(X) $(B)/tobit_f$(X) $(B)/rom2bin$(X) $(B)/gms2rom$(X)
+PROGS += $(B)/ec_load$(X) $(B)/ec_watch$(X) $(B)/ec_dump$(X) $(B)/ec_test$(X)
+
+TOCLEAN += util/test_hcif.o util/cart.o $(PROGS)
+TOCLEAN += util/dasm0256.o util/symtab.o util/bitmem.o 
+TOCLEAN += util/tohex.o util/tobit.o util/tobit_r.o util/show_grom.o
+TOCLEAN += util/fromhex.o util/frombit.o util/frombit_r.o 
+TOCLEAN += util/tobit_f.o util/rom2bin.o util/gms2rom.o
+TOCLEAN += util/ec_dump.o util/bin2rom.o util/test_cart.o
+TOCLEAN += util/ecscable.o util/ec_load.o util/ec_watch.o util/ec_test.o

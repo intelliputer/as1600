@@ -1,0 +1,130 @@
+==============================================================================
+ Release Notes
+==============================================================================
+
+Release 003
+-----------
+ -- Minor assembler tweaks to allow assembler to reassemble most output
+    coming from DASM1600.  Specifically, added support for BEXT, support
+    for a label on NOPP, and support for specifying ,2 on NOP and SIN.
+
+ -- Added a bunch of new examples (MOB Test, MemTest and BankTest,
+    Hello World).  
+
+ -- Added Intellicart Bank Switching code to examples/library
+
+ -- Added ECScable documentation and support routines
+
+ -- Added a bunch of oddball utility functions, including "rom2bin".
+
+ -- Changed Makefile structure to jzIntv-like top-level Makefile.
+
+ -- Fixed a number of minor "timing error" bugs, such as initializing
+    the color stack from the title-fixup routine rather than from an
+    interrupt handler.  This causes the title to look ok on a 
+    standard NTSC Inty, but wrong on a Sears SVA.
+
+ -- Wrote QuickStart guide.
+
+ -- Added support for .ROM and BIN+CFG output formats to assembler
+
+ -- Modified examples to include common routines like RAND, HEX16,
+    etc. from library rather than placing them inline.  This process
+    exposed a few hidden bugs (such as a missing TSTR in RAND, and
+    an alignment issue in mem_test).
+
+ -- Replaced DRAWSTRINGx with less-confusing PRINT.xxx names.  The
+    functionality is the same and the code is almost identical. 
+    The new names should be much more mnemonic, though.
+
+ -- Added INCLUDE-path support to AS1600.  This allows you to set up
+    an environment variable and/or use commandline flags to specify
+    where to search for INCLUDE files.  This should make it easier
+    to use the "library" routines w/ your various projects.  See
+    "doc/as1600.txt" for more details.
+
+ -- Added a bunch of new programming documentation for the Intellivision,
+    including details on the STIC, on interrupts, and a detailed memory
+    map description.  All of this lives under "doc/programming".
+    The Intro to CP-1600 doc has also been moved to that directory.
+
+ -- Added my "tech info" pages under "doc/tech".
+
+ -- Most of the text files are now in DOS format, although source files
+    remain in Unix format due to compiler issues.  See src/README.txt
+    for an explanation.
+
+ -- Fixed a number of minor as1600 bugs, including weirdness with
+    memory attributes and missing support for "<>" (not-equal)
+    operator.
+
+Release 002
+-----------
+ -- More minor assembler fixes.  (Fixes the "unimplemented width" error
+    that came up intermittently.)
+
+ -- Add new "STRUCT" and "ENDS" directives.  These allow you to define
+    a structure in memory like so (using EQU's mind you!):
+
+        PSG         STRUCT $1F0      ; PSG is at $1F0 in memory map
+        @@per_a_lo  EQU  $ + 0
+        @@per_a_hi  EQU  $ + 4
+
+        @@per_b_lo  EQU  $ + 1
+        @@per_b_hi  EQU  $ + 5
+
+        @@per_c_lo  EQU  $ + 2
+        @@per_c_hi  EQU  $ + 6
+                    ENDS
+
+    Don't put anything that actually allocates storage into a STRUCT
+    just yet.  It's very alpha.
+
+ -- Added "gimini.asm" file which describes the GIMINI memory map
+    and peripherals (eg. PSG, STIC, GROM, VOICE), and provides a ton
+    of default symbols you can use in your application.
+
+ -- Added "routines.asm" file which contains some useful routines.
+
+Release 001
+-----------
+ -- This release fixes some issues with the assembler that thankfully hadn't
+    caused programs to misbehave, but were problems nonetheless.
+
+     -- The internal location counter was not being maintained properly in
+        some places, which caused some weirdness in the listing file.  Also, 
+        there were some problems with PC-relative constant generation 
+	(eg. '$ - foo' or 'foo - $') that resulted in unnecessary SDBDs in 
+        certain cases
+
+     -- 'BYTE' and 'DECLE' directives have been made more strict, with
+        'BYTE' allowing only 8-bit quantities and 'DECLE' allowing quantities
+        up to the defined rom-width (as specified in a ROMW directive).
+
+ -- The "large.asm" example had some stupid bugs that have been fixed.  
+    These bugs caused the rotating globe to shear.
+
+ -- A "mini-EXEC" and "mini-GROM" have been included which contain NO
+    Mattel/Intellivision code.  These are in the "bin" directory and
+    are named "miniexec.bin" and "minigrom.bin".  The source for these
+    is in the "Examples" directory.
+
+     -- The "mini-EXEC" contains only a simple interrupt dispatcher and
+        some code to jump to the "START" entry in a ROM header.  It is
+        sufficient for running the existing examples, although perhaps
+        not to their fullest extent. (eg. there's no title screen,
+        for instance.)  This enables users to run these examples under
+        jzIntv without requiring an official EXEC.BIN.
+
+     -- The "mini-GROM" contains a variant of the IBM-style Extended ASCII
+        character set and font.  The font has been shifted 32 positions
+        so that code written to work with the Intellivision GROM will 
+        work with this "mini-GROM", at least for alpha-numerics and 
+        punctuation.
+
+Release 000
+-----------
+
+ -- This was the initial 'alpha' release which includes the assembler and
+    disassembler, and a very small handful of examples.
+

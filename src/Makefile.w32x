@@ -1,0 +1,70 @@
+##############################################################################
+## Source-level Makefile for SDK-1600
+##
+## The whole make process is driven from the top-level Makefile.  In contrast
+## to the (poor) advice given in the Make documentation, I do _not_ call make
+## recursively to build the source of this project.
+##############################################################################
+
+##############################################################################
+## Project directory structure
+##############################################################################
+B=../bin
+L=../lib
+
+##############################################################################
+## Project-wide build flags
+##############################################################################
+P         = PATH=/usr/local/win32/bin:$$PATH; export PATH;
+
+SDL_DIR   = /usr/local/win32/i586-mingw32
+SDL_CFLAGS= -I$(SDL_DIR)/include -D_REENTRANT 
+SDL_LFLAGS= -L$(SDL_DIR)/lib -lmingw32 -lSDLmain -lSDL
+
+WARN    = -Wall -W -Wshadow -Wpointer-arith \
+			-Wbad-function-cast -Wcast-qual 
+
+# Set "X" to be the executable extension
+X = .exe
+
+CC = $(P) gcc
+
+ DEF_FLAGS  = -DWIN32 -DDOSTMP #-DNOGETOPT
+
+#OPT_FLAGS = -O
+#OPT_FLAGS = -O2 -ggdb $(WARN)
+ OPT_FLAGS = -O6 $(WARN)
+#OPT_FLAGS = -O2 -pg -ggdb $(WARN) 
+
+CFLAGS = $(OPT_FLAGS) -I. -I.. $(DEF_FLAGS)
+LFLAGS = -L../lib 
+
+OBJS=
+PROG=
+TOCLEAN=core
+
+PROGS=$(PROG)
+
+CFLAGS += $(SDL_CFLAGS) 
+LFLAGS += $(SDL_LFLAGS)
+
+##############################################################################
+## Generic build-rules
+##############################################################################
+
+all: $(OBJS) $(PROG)
+
+$(PROG): $(OBJS)
+	$(CC) -o $(PROG) $(OBJS) $(CFLAGS) $(LFLAGS)
+
+clean:
+	rm -f $(OBJS) 
+	rm -f $(TOCLEAN)
+
+%.o: %.c
+	$(CC) -o $@ $(CFLAGS) -c $<
+
+##############################################################################
+## Makefile.common includes all the subMakefiles and such
+##############################################################################
+ include Makefile.common

@@ -1,0 +1,15 @@
+##############################################################################
+## Include module-specific Makefiles.  
+##############################################################################
+ include misc/subMakefile	# Miscellaneous support routines.
+ include plat/subMakefile	# Platform-specific initialization
+ include icart/subMakefile	# Intellicart emulation
+ include util/subMakefile	# Utility programs
+ include asm/subMakefile	# Assembler (as1600)
+ include dasm/subMakefile	# Disassembler (dasm1600)
+
+
+$(PROG): $(OBJS)
+
+all: $(PROGS)
+

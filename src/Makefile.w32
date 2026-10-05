@@ -1,0 +1,64 @@
+##############################################################################
+## Source-level Makefile for SDK-1600
+##
+## The whole make process is driven from the top-level Makefile.  In contrast
+## to the (poor) advice given in the Make documentation, I do _not_ call make
+## recursively to build the source of this project.
+##############################################################################
+
+##############################################################################
+## Project directory structure
+##############################################################################
+B=../bin
+L=../lib
+
+##############################################################################
+## Project-wide build flags
+##############################################################################
+
+# Set "X" to be the executable extension
+X  = .exe
+
+WARN    = -Wall -W -Wshadow -Wpointer-arith
+WARN   += -Wbad-function-cast -Wcast-qual 
+
+CC = gcc
+
+ DEF_FLAGS  = -DWIN32
+
+#OPT_FLAGS = -O
+#OPT_FLAGS = -O2 -ggdb $(WARN)
+ OPT_FLAGS = -O6 $(WARN)
+#OPT_FLAGS = -O2 -pg -ggdb $(WARN) 
+
+CFLAGS = $(OPT_FLAGS) -I. -I.. $(DEF_FLAGS)
+LFLAGS = -L../lib 
+
+OBJS=
+PROG=
+TOCLEAN=core
+
+PROGS=$(PROG)
+
+CFLAGS += $(SDL_CFLAGS) 
+LFLAGS += $(SDL_LFLAGS)
+
+##############################################################################
+## Generic build-rules
+##############################################################################
+
+all: $(OBJS) $(PROG)
+
+$(PROG): $(OBJS)
+	$(CC) -o $(PROG) $(OBJS) $(CFLAGS) $(LFLAGS)
+
+clean:
+	for %f in ( $(OBJS) $(TOCLEAN) ) do del %f
+
+%.o: %.c
+	$(CC) -o $@ $(CFLAGS) -c $<
+
+##############################################################################
+## Makefile.common includes all the subMakefiles and such
+##############################################################################
+ include Makefile.common
