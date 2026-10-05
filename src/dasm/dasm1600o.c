@@ -566,7 +566,7 @@ int main(int argc, char **argv)
                     OPERAND1(R2);
                 }
                 else
-                if ((w1 & 0x3) == 7)
+                if ((w1 & 0x7) == 7)
                 {
                     OPCODE("JR");
                     OPERAND1(R2);

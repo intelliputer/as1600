@@ -713,7 +713,7 @@ int main(int argc, char **argv)
                         OPERAND1(R2);
                     }
                     else
-                    if ((w1 & 0x3) == 7)
+                    if ((w1 & 0x7) == 7)
                     {
                         OPCODE("JR");
                         OPERAND1(R2);
@@ -1036,11 +1036,12 @@ int main(int argc, char **argv)
 
         if (pass == 2)
         {
-            char buf[11];
+            char buf[sizeof(display_buffer.operand1_field) +
+                     sizeof(display_buffer.operanddel_field)];
 
-            sprintf(buf, "%s%s",
-                    display_buffer.operand1_field, 
-                    display_buffer.operanddel_field);
+            snprintf(buf, sizeof(buf), "%s%s",
+                     display_buffer.operand1_field,
+                     display_buffer.operanddel_field);
 
             if (datatype[addr] & 2)
                 sprintf(display_buffer.label_field,"L%.4X:",gen_label(addr));
@@ -1153,4 +1154,3 @@ int main(int argc, char **argv)
 /* ======================================================================== */
 /*                Copyright (c) 1998-2000, Frank Palazzolo                  */
 /* ======================================================================== */
-
