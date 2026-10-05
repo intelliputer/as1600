@@ -57,7 +57,7 @@ double elapsed(int restart)
 }
 
 
-main()
+int main(void)
 {
     FILE *f;
     int i;

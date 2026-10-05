@@ -54,7 +54,7 @@ double elapsed(int restart)
 }
 
 
-main()
+int main(void)
 {
     int i;
     ecscable_t ec;

@@ -138,13 +138,14 @@ static int (*S_Comp)(void *,void *);
 static PAVLNode    AVLNodePool=NULL;
 #define     CLUMPSIZE   8192
 #define     CLUMPCOUNT  (CLUMPSIZE/sizeof(TAVLNode))
+
+static void PutNode(PAVLNode node);
  
 static void
 FillPool
 (void)
 {
     PAVLNode end;
-    static void PutNode(PAVLNode);
     int i;
 
     end=(PAVLNode)malloc(CLUMPSIZE);

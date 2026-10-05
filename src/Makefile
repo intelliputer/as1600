@@ -35,7 +35,8 @@ WARN    = -Wall -W -Wshadow -Wpointer-arith \
  OPT_FLAGS = -O6 -fomit-frame-pointer $(WARN)
 #OPT_FLAGS = -O2 -pg -ggdb $(WARN)
 
-CFLAGS = $(OPT_FLAGS) -I. -I.. $(DEF_FLAGS)
+# SDK-1600 predates C99; retain GNU C89 compatibility on modern compilers.
+CFLAGS = $(OPT_FLAGS) -std=gnu89 -I. -I.. $(DEF_FLAGS)
 LFLAGS = -L../lib
 
 

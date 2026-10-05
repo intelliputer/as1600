@@ -36,11 +36,11 @@ COMPILERS:  Microport Sys V/AT, ATT Yacc, Turbo C V1.5, Bison (CUG disk 285)
 #include "frasmdat.h"
 
 FILE * intermedf = (FILE *) NULL;
-char interfn[32] = 
+char interfn[64] =
 #ifdef DOSTMP
  "frtXXXXXX";
 #else
- "/usr/tmp/frtXXXXXX";
+ "/tmp/frtXXXXXX";
 #endif
 char *cfgfn = NULL;
 char *hexfn, *loutfn;
@@ -64,9 +64,7 @@ char hexcva[17] = "0123456789abcdef";
 void parse_pathvar(char *str);
 void append_path(char *str);
 
-main(argc, argv)
-    int argc;
-    char *(argv[]);
+int main(int argc, char *argv[])
 /*
     description top driver routine for framework cross assembler
                 set the cpu type if implemented in parser
@@ -174,11 +172,20 @@ main(argc, argv)
     {
         loutf = stdout;
     }
-#ifndef macintosh
+#if !defined(macintosh) && !defined(DOSTMP)
+    {
+        int interfd = mkstemp(interfn);
+        if (interfd >= 0)
+            intermedf = fdopen(interfd, "w");
+    }
+#else
+# ifndef macintosh
     mktemp(interfn);
+# endif
+    intermedf = fopen(interfn, "w");
 #endif
 
-    if( (intermedf = fopen(interfn, "w")) == (FILE *) NULL)
+    if (intermedf == (FILE *) NULL)
     {
         fprintf(stderr, "%s: cannot open temp file %s\n",
             argv[0], interfn);
@@ -567,4 +574,3 @@ void parse_pathvar(char *str)
     free(tmp);
 }
  
-

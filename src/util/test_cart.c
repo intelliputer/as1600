@@ -7,7 +7,7 @@
 
 cart_rd_t cr;
 
-main()
+int main(void)
 {
     int i, d;
     unsigned w, r;

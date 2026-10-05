@@ -1,4 +1,4 @@
-# SDK-1600 (Release 3)
+## SDK-1600 (Release 3)
 
 A software development kit for General Instrument's CP-1600 family of
 16-bit CPUs, most notably the Mattel Intellivision (also marketed by GI as
@@ -106,9 +106,128 @@ executables are placed in `bin/`.
 
 ## Getting started
 
-Read [`QuickStart.txt`](QuickStart.txt) for a guided introduction. The included
-programs target the Intellivision and can be used on hardware with an
-Intellicart or in a compatible emulator.
+The included programs target the Intellivision and can be used on hardware with
+an Intellicart or in a compatible emulator.
+
+### Assemble an example
+
+Run the assembler from an example directory so that its relative `INCLUDE`
+paths resolve correctly:
+
+```sh
+cd examples/hello
+as1600 -o hello.bin -l hello.lst hello.asm
+```
+
+This produces:
+
+| File | Purpose |
+| --- | --- |
+| `hello.bin` | Program image |
+| `hello.cfg` | BIN+CFG memory-map configuration |
+| `hello.lst` | Assembly listing |
+
+Successful assembly ends with zero errors and warnings. To create an
+Intellicart ROM instead, use `-o hello.rom`. The format is selected from the
+output-file extension.
+
+### ROM formats and conversion
+
+SDK-1600 supports two output formats:
+
+- **BIN+CFG**: a raw binary image and a companion textual configuration file.
+- **Intellicart ROM**: a single `.rom` image containing the program and its
+  memory-map information.
+
+Convert between them with:
+
+```sh
+bin2rom hello.bin
+rom2bin hello.rom
+```
+
+For a repeatable POSIX build:
+
+```sh
+#!/bin/sh
+die() { echo "BUILD ABORTED DUE TO ERRORS"; exit 1; }
+
+as1600 -o hello.rom -l hello.lst hello.asm || die
+rom2bin hello.rom || die
+```
+
+### Examples and library files
+
+Examples are designed to assemble in their own directories. Most include
+routines from `examples/library/` via relative paths. If you move an example
+into another project, update its `INCLUDE` paths, copy the required library
+files, or configure `AS1600_PATH` as described in
+[`doc/utilities/as1600.txt`](doc/utilities/as1600.txt).
+
+For CP-1600 background, see the documentation under `doc/`, especially the
+Intro to CP-1600 material in `doc/programming/`.
+
+## ROM catalog names
+
+The following names were requested by SDK-1600 author Joseph Zbiciak for ROM
+catalogs. The included programs are GPL-licensed; they are not public domain.
+
+| Binary file | Catalog name |
+| --- | --- |
+| `balls1.bin` | SDK-1600 Psycho Balls #1 (2002) (JZ) |
+| `balls2.bin` | SDK-1600 Psycho Balls #2 (2002) (JZ) |
+| `bankdemo.bin` | SDK-1600 Intellicart Bankswitching Demo (2002) (JZ) |
+| `banktest.bin` | SDK-1600 Intellicart Bankswitched Memory Test (2002) (JZ) |
+| `bankworld.bin` | SDK-1600 Intellicart Bankswitched Spinning World (2002) (JZ) |
+| `bncpix.bin` | SDK-1600 Bouncing Pixels (2002) (JZ) |
+| `csumexec.bin` | SDK-1600 ROM Checksummer (2002) (JZ) |
+| `gram_scroll.bin` | SDK-1600 GRAM-Based Scrolling Demo #1 (2002) (JZ) |
+| `gram_scroll2.bin` | SDK-1600 GRAM-Based Scrolling Demo #2 (2002) (JZ) |
+| `handdemo.bin` | SDK-1600 Hand Controller Scanning Demo (2002) (JZ) |
+| `hello.bin` | SDK-1600 Hello World (2002) (JZ) |
+| `life.bin` | SDK-1600 John Conway's Life (2002) (JZ) |
+| `mazedemo.bin` | SDK-1600 Maze Demo (2002) (JZ) |
+| `mem_test.bin` | SDK-1600 Intellicart Memory Test (2002) (JZ) |
+| `mob_test.bin` | SDK-1600 Movable Object Demo (2002) (JZ) |
+| `tagalong.bin` | SDK-1600 Tag-Along Todd #1 (2002) (JZ) |
+| `tagalong2.bin` | SDK-1600 Tag-Along Todd #2a (2002) (JZ) |
+| `tagalong2b.bin` | SDK-1600 Tag-Along Todd #2b (2002) (JZ) |
+| `world.bin` | SDK-1600 Spinning World (2002) (JZ) |
+
+## Release history
+
+### Release 003
+
+- Improved AS1600 reassembly support for DASM1600 output, including `BEXT`,
+  labels on `NOPP`, and `,2` forms of `NOP` and `SIN`.
+- Added examples including MOB Test, MemTest, BankTest, and Hello World, plus
+  Intellicart bank-switching library code.
+- Added ECScable support and documentation, ROM conversion utilities, BIN+CFG
+  and `.ROM` assembler output, and `AS1600_PATH` include-path support.
+- Reorganized the build around a top-level Makefile and improved example
+  library reuse.
+- Expanded STIC, interrupt, memory-map, and technical documentation.
+- Fixed timing, assembler, library, memory-attribute, and not-equal-operator
+  issues.
+
+### Release 002
+
+- Fixed intermittent assembler width errors.
+- Added the experimental `STRUCT` and `ENDS` directives.
+- Added `gimini.asm` hardware and memory-map symbols, and shared routines.
+
+### Release 001
+
+- Corrected assembler location-counter and PC-relative constant behavior, and
+  made `BYTE` and `DECLE` range checking stricter.
+- Fixed the rotating-world example.
+- Added mini-EXEC and mini-GROM replacements that contain no Mattel code,
+  enabling examples to run in jzIntv without an official EXEC image.
+
+### Release 000
+
+Initial alpha release with the assembler, disassembler, and a small set of
+examples.
 
 ## Historical resources
 

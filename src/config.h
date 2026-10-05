@@ -32,15 +32,20 @@
 
 #if !defined(_BIG_ENDIAN) && !defined(_LITTLE_ENDIAN)
 #  include <endian.h>
-#  include <bytesex.h>
-#  ifndef __BYTE_ORDER
-#    error Please manually set your machine endian in 'config.h'
-#  endif
-#  if __BYTE_ORDER==4321
+#  if defined(__BYTE_ORDER__) && defined(__ORDER_BIG_ENDIAN__) && \
+      __BYTE_ORDER__ == __ORDER_BIG_ENDIAN__
 #    define _BIG_ENDIAN
-#  endif
-#  if __BYTE_ORDER==1234
+#  elif defined(__BYTE_ORDER__) && defined(__ORDER_LITTLE_ENDIAN__) && \
+        __BYTE_ORDER__ == __ORDER_LITTLE_ENDIAN__
 #    define _LITTLE_ENDIAN
+#  elif defined(__BYTE_ORDER) && defined(__BIG_ENDIAN) && \
+        __BYTE_ORDER == __BIG_ENDIAN
+#    define _BIG_ENDIAN
+#  elif defined(__BYTE_ORDER) && defined(__LITTLE_ENDIAN) && \
+        __BYTE_ORDER == __LITTLE_ENDIAN
+#    define _LITTLE_ENDIAN
+#  else
+#    error Please manually set your machine endian in 'config.h'
 #  endif
 #  if !defined(_BIG_ENDIAN) && !defined(_LITTLE_ENDIAN)
 #    error Unsupported __BYTE_ORDER.  Set your machine endian in 'config.h'.
