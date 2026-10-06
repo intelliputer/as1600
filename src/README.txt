@@ -1,5 +1,17 @@
 This is the source tree for SDK-1600.  There's a lot here.  
 
+Modern AS1600 build
+-------------------
+
+The modern examples require the Mira-derived assembler source closure in
+"modern-as1600".  Build it with:
+
+    make -C src modern-as1600
+
+This writes the compatible assembler to "bin/as1600".  The legacy Release 3
+build below remains useful for the original utilities, but it does not support
+the modern AS1600 directives and must not be used to refresh "bin/as1600".
+
 If you're building SDK-1600, then you probably want to look at the Makefiles
 and config.h.  If you're building under Unix/Linux, use "Makefile".
 If you're building under Win32, use "Makefile.w32".  If you're building

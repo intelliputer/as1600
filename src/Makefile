@@ -53,7 +53,14 @@ LFLAGS += $(SDL_LFLAGS)
 ## Generic build-rules
 ##############################################################################
 
+.PHONY: modern-as1600
+
 all: $(OBJS) $(PROG)
+
+# Build the Mira-derived assembler required by the modern examples.  It is
+# intentionally separate from the legacy Release 3 assembler sources above.
+modern-as1600:
+	$(MAKE) -C modern-as1600
 
 $(PROG): $(OBJS)
 	$(CC) -o $(PROG) $(OBJS) $(CFLAGS) $(LFLAGS)
