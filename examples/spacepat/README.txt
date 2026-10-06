@@ -33,7 +33,6 @@ Here's a map to what's in LunarMP:
 |-- README.txt          This file
 |
 |-- Makefile            Linux Makefile to build LunarMP
-|-- build.bat           DOS batch file to build LunarMP
 |-- dbgmac.cfg          Debug helpers for INTVPC
 |
 |-- lunar_mp.asm
@@ -157,20 +156,6 @@ Here's a map to what's in LunarMP:
 |   |-- joefnt.asm
 |   |-- sctbl.asm
 |   `-- spawns.asm
-|
-|-- exe                 DOS/Linux executables for helper utilities
-|   |-- fixcfg.exe
-|   |-- makemmnt.exe
-|   |-- makerock.exe
-|   |-- maketmnt.exe
-|   |-- mkfont16
-|   |-- mkfont16.exe
-|   |-- pm16.exe
-|   |-- profile.exe
-|   |-- rom2bin.exe
-|   |-- sctc
-|   |-- sctc.exe
-|   `-- wasm3.exe
 |
 |-- c                   C source for little helper utilities
 |   |-- config.h

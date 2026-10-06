@@ -13,8 +13,6 @@ assembler, run "make -C src modern-as1600".
 
 If you're building SDK-1600, then you probably want to look at the Makefiles
 and config.h.  If you're building under Unix/Linux, use "Makefile".
-If you're building under Win32, use "Makefile.w32".  If you're building
-for Win32 using a cross-compiler under Unix/Linux, use "Makefile.w32x".
 
 For each of these, make sure CC points to the appropriate compiler, etc.
 
@@ -23,9 +21,7 @@ Here's a quick map to what's where:
 
    src
     |-- Makefile        UNIX / Linux Makefile
-    |-- Makefile.w32    Win32 Makefile (tested w/ Mingw32)
-    |-- Makefile.w32x   Linux -> Win32 cross-compile Makefile
-    |-- Makefile.common Common elements across above 3 Makefiles
+    |-- Makefile.common Common build elements
     |-- config.h        Configuration header file
     |-- modern-as1600   Modern AS1600 source closure
     |-- dasm            Disassembler
@@ -65,16 +61,9 @@ The following utilities are built from this tree:
 The Makefiles are configured to place all the executables in the "bin"
 directory above this one.
 
-Source code file format note:  The source files contained here are in 
-Unix text format.  Many Windows programs handle this format ok, but 
-some do not.  For instance, Notepad will not correctly view these files.
-Wordpad will, though, as will MS-DOS EDIT.  I believe most development 
-environments (such as Visual Studio) are also able to cope with 
-Unix-format files, which is why I'm not too worried.
+Source code file format note:  The source files contained here are in
+Unix text format.
 
-The reason for this format difference is that the cross-compiler I have
-for generating Windows executables from Linux ironically cannot cope with
-DOS-format files.  The Linux version of Bison (which is needed to convert
-the modern AS1600 grammar to its generated parser) also does not cope with
-DOS format files.
+The Linux version of Bison used to regenerate the modern AS1600 parser also
+expects Unix-format source files.
 

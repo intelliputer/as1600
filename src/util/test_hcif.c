@@ -25,7 +25,7 @@
 
 static const char rcs_id[]="$Id: test_hcif.c,v 1.5 2002/04/17 18:31:37 im14u2c Exp $";
 
-#if (!defined(linux) && !defined(WIN32)) || !defined(i386)
+#if !defined(linux) || !defined(i386)
 
 /*
  * ===========================================================================
@@ -39,7 +39,7 @@ int main(void)
     (
         "Sorry, the Nudds/Moeller Hand Controller Interface is not\n"
         "supported this platform.  The Hand Controller Interface is \n"
-        "supported under Linux or Windows on a PC only at this time.\n"
+        "supported under Linux on an x86 PC only at this time.\n"
     );
     return 1;
 }
