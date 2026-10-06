@@ -94,14 +94,15 @@ The expected response when no source file is supplied is `as1600: no input file`
 ### Building on Linux or Unix
 
 Linux binaries are included, so a build is often unnecessary. To rebuild the
-modern assembler used by the imported examples, run:
+SDK tools, including the modern assembler used by the imported examples, run:
 
 ```sh
-make -C src modern-as1600
+make -C src
 ```
 
-For the legacy Release 3 utilities, follow [`src/README.txt`](src/README.txt);
-the resulting executables are placed in `bin/`.
+To rebuild only the assembler, use `make -C src modern-as1600`. See
+[`src/README.txt`](src/README.txt) for the source layout; executables are
+placed in `bin/`.
 
 > **Legacy Macintosh source:** `src/plat/plat_mac.c` and its related resource
 > files target Classic Mac OS Toolbox APIs. They are retained for historical

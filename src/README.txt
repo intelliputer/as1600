@@ -4,13 +4,12 @@ Modern AS1600 build
 -------------------
 
 The modern examples require the Mira-derived assembler source closure in
-"modern-as1600".  Build it with:
+"modern-as1600".  It is built automatically with the SDK tools:
 
-    make -C src modern-as1600
+    make -C src
 
-This writes the compatible assembler to "bin/as1600".  The legacy Release 3
-build below remains useful for the original utilities, but it does not support
-the modern AS1600 directives and must not be used to refresh "bin/as1600".
+This writes the compatible assembler to "bin/as1600".  To build only the
+assembler, run "make -C src modern-as1600".
 
 If you're building SDK-1600, then you probably want to look at the Makefiles
 and config.h.  If you're building under Unix/Linux, use "Makefile".
@@ -28,7 +27,7 @@ Here's a quick map to what's where:
     |-- Makefile.w32x   Linux -> Win32 cross-compile Makefile
     |-- Makefile.common Common elements across above 3 Makefiles
     |-- config.h        Configuration header file
-    |-- asm             Assembler 
+    |-- modern-as1600   Modern AS1600 source closure
     |-- dasm            Disassembler
     |-- icart           Intellicart ROM support routines
     |-- mini            Mini-EXEC and Mini-GROM, sufficient for examples
@@ -73,8 +72,9 @@ Wordpad will, though, as will MS-DOS EDIT.  I believe most development
 environments (such as Visual Studio) are also able to cope with 
 Unix-format files, which is why I'm not too worried.
 
-The reason for this format difference is that the cross-compiler I have 
-for generating Windows executables from Linux ironically cannot cope with 
-DOS-format files.  The Linux version of Bison (which is needed to convert 
-as1600.y to as1600.c) also does not cope with DOS format files.
+The reason for this format difference is that the cross-compiler I have
+for generating Windows executables from Linux ironically cannot cope with
+DOS-format files.  The Linux version of Bison (which is needed to convert
+the modern AS1600 grammar to its generated parser) also does not cope with
+DOS format files.
 

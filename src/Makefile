@@ -55,10 +55,9 @@ LFLAGS += $(SDL_LFLAGS)
 
 .PHONY: modern-as1600
 
-all: $(OBJS) $(PROG)
+all: $(OBJS) $(PROG) modern-as1600
 
-# Build the Mira-derived assembler required by the modern examples.  It is
-# intentionally separate from the legacy Release 3 assembler sources above.
+# Build the Mira-derived assembler required by the modern examples.
 modern-as1600:
 	$(MAKE) -C modern-as1600
 

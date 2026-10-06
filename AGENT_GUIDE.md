@@ -43,18 +43,15 @@ Read these references before making low-level changes:
 
 ## Validated build workflow
 
-Build the modern AS1600 assembler from the repository root:
+Build the SDK tools from the repository root:
 
 ```sh
-make -C src modern-as1600 -j32
+make -C src -j32
 ```
 
-The build writes `as1600` to `bin/` and supports the modern example set,
-including metadata, macro, JLP, and CP-1600X features. Its Mira-derived source
-closure is under `src/modern-as1600/`.
-
-`make -C src` continues to build the legacy Release 3 utilities. Do not use it
-to refresh `as1600`; use the `modern-as1600` target above instead.
+The build writes native executables to `bin/`. `as1600` is built from the
+Mira-derived source closure in `src/modern-as1600/` and supports the modern
+example set, including metadata, macro, JLP, and CP-1600X features.
 
 Assemble an example from its own directory so its relative include paths work:
 
