@@ -1,13 +1,6 @@
-## SDK-1600 (Release 3)
+## AS-1600
 
-A software development kit for General Instrument's CP-1600 family of
-16-bit CPUs, most notably the Mattel Intellivision (also marketed by GI as
-the GIMINI-8900).
-
-SDK-1600 is independently produced and is not a product of General
-Instruments, Mattel Electronics, Intellivision Inc., INTV Corp., or
-Intellivision Productions. Its goal is to provide a free—both gratis and
-libre—toolset for programming CP-1600-based hardware.
+A development kit for General Instrument's CP-1600 family of 16-bit CPUs, including the Intellivision 1610.
 
 ## Contents
 
