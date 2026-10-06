@@ -1,6 +1,6 @@
-## AS-1600
+## SDK-1600
 
-A development kit for General Instrument's CP-1600 family of 16-bit CPUs, including the Intellivision 1610.
+A software development kit for General Instrument's CP-1600 family of 16-bit CPUs, including the Intellivision 1610.
 
 ## Contents
 
