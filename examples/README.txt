@@ -110,6 +110,10 @@ the top-level directory for details.
 |   |-- README.txt       bankswitch support.
 |   `-- banktest.asm
 |
+|-- intellicart-simple   Historic, self-contained Intellicart bank-switch
+|   |-- README.md        hardware-reference test.
+|   `-- simple.asm
+|
 `-- ecscable             The ECScable Monitor and construction information
     |-- README.txt
     `-- ec_mon2.asm 
