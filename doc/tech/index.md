@@ -9,6 +9,7 @@ repository preserves the material available in Release 3.
 
 - [Intellivision Overview](overview.md)
 - [Hardware Specifics](hardware.md)
+- [Intellivoice Hardware Overview](ivoice.md)
 - [CP-1600 State-Flow Diagram](state_flow_diag.md)
 - [SP-0256 Instruction Set](sp0256_instr_set.md)
 - [Intellivision Easter Eggs](easter.md)

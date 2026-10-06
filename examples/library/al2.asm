@@ -8,7 +8,7 @@
 ;;  containing a single allophone.  This series of files may be useful in   ;;
 ;;  situations where space is at a premium.                                 ;;
 ;;                                                                          ;;
-;;  Consult the Archer SP0256-AL2 documentation (under doc/programming)     ;;
+;;  Consult the Archer SP0256-AL2 documentation (doc/voice/al2.pdf)         ;;
 ;;  for more information about SP0256-AL2's allophone library.              ;;
 ;;                                                                          ;;
 ;; ------------------------------------------------------------------------ ;;

@@ -8,3 +8,4 @@
 - [STIC reference](stic.md)
 - [Programmable Sound Generator reference](psg.md)
 - [Intellicart programming](intellicart.md)
+- [Intellicart ROM metadata tag format](../rom_format/id_tag.txt)

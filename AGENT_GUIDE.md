@@ -27,6 +27,7 @@ Read these references before making low-level changes:
 - [STIC reference](doc/programming/stic.md)
 - [GROM and GRAM graphics memory](doc/programming/graphics_mem.md)
 - [Intellicart programming](doc/programming/intellicart.md)
+- [Intellicart ROM metadata tag format](doc/rom_format/id_tag.txt)
 - [Technical hardware reference](doc/tech/index.md)
 
 ## Repository map
@@ -38,8 +39,10 @@ Read these references before making low-level changes:
 | `examples/library/` | Shared assembly includes such as `gimini.asm`, `print.asm`, and `fillmem.asm` |
 | `src/` | Toolchain source and its native Linux build |
 | `doc/programming/` | CPU, memory-map, STIC, timing, PSG, and cartridge details |
+| `doc/rom_format/` | Intellicart manual and ROM metadata-tag specification |
 | `doc/utilities/` | Tool-specific syntax and behavior |
 | `doc/tech/` | Detailed hardware, ECS, Intellivoice, keyboard, and SP-0256 material |
+| `doc/voice/` | Primary SP0256-AL2 reference and editable speech-filter diagram source |
 
 ## Validated build workflow
 
